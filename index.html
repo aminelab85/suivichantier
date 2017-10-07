@@ -12,8 +12,8 @@
   </head>
   <body ng-app="myApp" ng-cloak>
     <md-content style="height: 100%;" ng-controller="MainCtrl">
-      <div layout="row" style="height: 100%;">
-        <md-card flex="40" style="height: (100% - 15px);">
+      <div layout-gt-sm="row" layout="column" style="height: 100%;">
+        <md-card flex="40" flex-xs="100" style="height: (100% - 15px);">
           <add-facture ng-show="facturesComponent == 'form'" flex
                        factures-component="facturesComponent"
                        edited-item="editedItem"
