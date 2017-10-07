@@ -12,10 +12,11 @@
   </head>
   <body ng-app="myApp" ng-cloak>
     <md-content style="height: 100%;" ng-controller="MainCtrl">
-      <div layout-gt-sm="row" layout="column" style="height: 100%;">
-        <md-card flex="40" flex-xs="100" style="height: (100% - 15px);">
+      <div layout="row" style="height: 100%;">
+        <md-card flex="inital" style="height: (100% - 15px);">
           <add-facture ng-show="facturesComponent == 'form'" flex
                        factures-component="facturesComponent"
+                       style="height: 100%;"
                        edited-item="editedItem"
                        list-factures="listFactures"></add-facture>
           <factures-table ng-show="facturesComponent == 'table'" flex
@@ -24,8 +25,15 @@
                           edited-item="editedItem"
                           list-factures="listFactures"></factures-table>
         </md-card>
-        <div flex="20">
-        </div>
+        <md-card flex="50" style="background-color: white;" hide show-gt-xs>
+          <tabs-overview list-factures="listFactures"></tabs-overview>
+        </md-card>
+        <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
+      </div>
+      <div layout="row" hide-gt-xs style="height: 100%;">
+        <md-card flex="grow" style="background-color: white;">
+          <tabs-overview list-factures="listFactures"></tabs-overview>
+        </md-card>
         <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
       </div>
     </md-content>
@@ -38,8 +46,12 @@
     <script src="vendor/js/angular-material.min.js"></script>
     <script src="vendor/js/md-data-table.min.js"></script>
     <script src="vendor/js/angular-indexed-db.min.js"></script>
+    <script src="vendor/js/ng-currency.js"></script>
     <script src="app.js"></script>
     <script src="components/factures/controller.js"></script>
     <script src="components/addFacture/controller.js"></script>
+    <script src="components/tabsOverview/controller.js"></script>
+    <script src="components/prevreel/controller.js"></script>
+    <script src="components/addPoste/controller.js"></script>
   </body>
 </html>

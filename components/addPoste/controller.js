@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('myApp')
-.component('addFacture', {
-  templateUrl: 'components/addFacture/view.html',
+.component('addPoste', {
+  templateUrl: 'components/addPoste/view.html',
   controller: ['$scope', '$q', '$indexedDB', ($scope, $q, $indexedDB) => {
 
     var ctrl = this;

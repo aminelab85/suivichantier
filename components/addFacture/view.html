@@ -2,15 +2,18 @@
   <div class="md-toolbar-tools">
     <h2 class="md-title">Ajouter une facture</h2>
     <div flex></div>
+    <md-button class="md-icon-button" ng-click="$ctrl.addItem()">
+      <md-icon style="color: green;">save</md-icon>
+    </md-button>
     <md-button class="md-icon-button" ng-click="$ctrl.createNew($event)">
       <md-icon>note_add</md-icon>
     </md-button>
     <md-button class="md-icon-button" ng-click="$ctrl.cancelEdition($event)">
-      <md-icon><i class="material-icons">highlight_off</i></md-icon>
+      <md-icon>highlight_off</md-icon>
     </md-button>
   </div>
 </md-toolbar>
-<div layout-padding style="background-color: white">
+<div layout-padding style="background-color: white; height: calc(100% - 100px);">
   <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
     <i class="material-icons">error_outline</i>
     <span>&nbsp; All fields are required.</span>
@@ -19,7 +22,7 @@
     <div layout="row" class="input-row">
       <md-input-container flex="30">
         <label>Montant</label>
-        <input ng-model="$ctrl.editedItem.montant">
+        <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.montant">
       </md-input-container>
       <md-input-container flex="70">
         <label>Enter date</label>
@@ -33,7 +36,37 @@
       </md-input-container>
     </div>
   </form>
-  <div style="text-align: right;">
-    <md-button class="md-raised md-warn" ng-click="$ctrl.addItem()" ng-disabled="item.form.$invalid">Ajouter</md-button>
-  </div>
+  <md-card style="height: calc(100% - 192px)">
+    <md-toolbar class="md-table-toolbar md-default">
+      <div class="md-toolbar-tools">
+        <h2 class="md-title">Répartir par lot</h2>
+        <div flex></div>
+        <md-button class="md-icon-button" ng-click="$ctrl.addLot($event)">
+          <md-icon>note_add</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-table-container style="height: calc(100% - 64px);">
+      <table md-table md-row-select ng-model="$ctrl.selected" md-progress="$ctrl.promise">
+        <thead md-head md-order="$ctrl.query.order">
+          <tr md-row>
+            <th md-column><span></span></th>
+            <th md-column><span>Lot</span></th>
+            <th md-column md-numeric><span>Montant</span></th>
+          </tr>
+        </thead>
+        <tbody md-body>
+          <tr md-row md-select="lot" md-select-id="name" md-auto-select ng-repeat="lot in $ctrl.editedItem.lots | filter:$ctrl.filter.query">
+            <td md-cell style="margin: 0; padding: 0;">
+              <md-button style="margin: 0; padding: 0;" class="md-icon-button" ng-click="$ctrl.deleteLot($index)">
+                <md-icon>delete</md-icon>
+              </md-button>
+            </td>
+            <td md-cell><input ng-model="lot.lot" class="md-input-lightweight" placeholder="Lot..."></td>
+            <td md-cell><input type="text" ng-currency currency-symbol="€ " ng-model="lot.montant" class="md-input-lightweight" style="width: 80px; text-align: right;" placeholder="Montant..."></td>
+          </tr>
+        </tbody>
+      </table>
+    </md-table-container>
+  </md-card>
 </div>

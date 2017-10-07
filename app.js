@@ -1,4 +1,4 @@
-angular.module('myApp', ['ngMaterial','md.data.table','indexedDB'])
+angular.module('myApp', ['ngMaterial','md.data.table','indexedDB','ng-currency'])
 
 .config(($indexedDBProvider) => {
 
@@ -9,6 +9,11 @@ angular.module('myApp', ['ngMaterial','md.data.table','indexedDB'])
       if(!db.objectStoreNames.contains('factures'))
       {
          db.createObjectStore('factures', {keyPath: 'id', autoIncrement: true});
+      }
+
+      if(!db.objectStoreNames.contains('postes'))
+      {
+         db.createObjectStore('postes', {keyPath: 'id', autoIncrement: true});
       }
 
     });

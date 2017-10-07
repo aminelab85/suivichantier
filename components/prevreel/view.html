@@ -1,12 +1,12 @@
-<div style="background-color: white; height: 100%;" >
-  <md-toolbar class="md-table-toolbar md-primary" ng-hide="$ctrl.selected.length || $ctrl.filter.show">
+<div style="background-color: white; height: 100%;" ng-show="$ctrl.postesComponent == 'table'">
+  <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length || $ctrl.filter.show">
     <div class="md-toolbar-tools">
-      <h2 class="md-title">Factures</h2>
+      <h2 class="md-title"></h2>
       <div flex></div>
       <md-button class="md-icon-button" ng-click="$ctrl.filter.show = true">
         <md-icon>filter_list</md-icon>
       </md-button>
-      <md-button class="md-icon-button" ng-click="$ctrl.facturesComponent = 'form'">
+      <md-button class="md-icon-button" ng-click="$ctrl.postesComponent = 'form'">
         <md-icon>note_add</md-icon>
       </md-button>
     </div>
@@ -39,20 +39,23 @@
   </md-toolbar>
   <md-table-container style="height: calc(100% - 64px);">
     <table md-table md-row-select ng-model="$ctrl.selected" md-progress="$ctrl.promise">
-      <thead md-head md-order="$ctrl.query.order" md-on-reorder="$ctrl.getFactures">
+      <thead md-head md-order="$ctrl.query.order" md-on-reorder="$ctrl.getPostes">
         <tr md-row>
-          <th md-column><span>Date</span></th>
-          <th md-column md-numeric><span>Montant</span></th>
-          <th md-column md-numeric>Description</th>
+          <th md-column><span>Poste</span></th>
+          <th md-column md-numeric><span>Prév</span></th>
+          <th md-column md-numeric><span>Réel</span></th>
+          <th md-column md-numeric><span>Marge</span></th>
         </tr>
       </thead>
       <tbody md-body>
-        <tr md-row md-select="facture" md-select-id="name" md-auto-select ng-repeat="facture in $ctrl.listFactures | filter:$ctrl.filter.query">
-          <td md-cell>{{facture.date | date:'dd/MM/yy'}}</td>
-          <td md-cell>{{facture.montant | currency :'€':2}}</td>
-          <td md-cell>{{facture.description}}</td>
+        <tr md-row md-select="poste" md-select-id="name" md-auto-select ng-repeat="poste in $ctrl.postes | filter:$ctrl.filter.query">
+          <td md-cell>{{poste.poste}}</td>
+          <td md-cell>{{poste.prev | currency :'€':2}}</td>
+          <td md-cell>{{poste.reel | currency :'€':2}}</td>
+          <td md-cell>{{poste.marge | currency :'€':2}}</td>
         </tr>
       </tbody>
     </table>
   </md-table-container>
 </div>
+<add-poste ng-show="$ctrl.postesComponent == 'form'"></add-poste>
