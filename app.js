@@ -19,7 +19,7 @@ angular.module('myApp', ['ngMaterial','md.data.table','indexedDB','ng-currency']
     });
 })
 
-.controller('MainCtrl', ['$scope', '$indexedDB', ($scope, $indexedDB) => {
+.controller('MainCtrl', ['$scope', '$rootScope', '$indexedDB', ($scope, $rootScope, $indexedDB) => {
 
   $scope.$on('ItemEditedEvent', (evt, args) => {
     $scope.facturesComponent = 'form';
@@ -38,6 +38,7 @@ angular.module('myApp', ['ngMaterial','md.data.table','indexedDB','ng-currency']
 
     store.getAll().then((facturesItems) => {
       $scope.listFactures = facturesItems;
+      $rootScope.$broadcast('DBMaj');
     });
 
   });

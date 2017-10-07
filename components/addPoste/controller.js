@@ -8,46 +8,43 @@ angular.module('myApp')
     var ctrl = this;
 
     var Ctrl = {
+      editedItem: {},
       addItem: addItem,
       cancelEdition: cancelEdition,
       createNew: createNew,
-      addLot: addLot,
-      deleteLot: deleteLot
-    }
+      styleMarge: styleMarge
+    };
 
-    $scope.$on('ItemEditedEvent', function(evt, args){
-      Ctrl.editedItem = args.data;
-    });
-
-    function deleteLot(index)
+    function styleMarge()
     {
-      this.editedItem.lots.splice(index,1);
+      if((this.editedItem.prev - this.editedItem.reel) < 0)
+      {
+        return {'color':'red'};
+      }
+      else
+      {
+        return {'color':'green'};
+      }
     };
 
     function addItem()
     {
       var theData = this.editedItem;
       var ctrl = this;
-      $indexedDB.openStore('factures', (store) => {
+      $indexedDB.openStore('postes', (store) => {
         store.upsert(theData).then((e) => {
           theData['id'] = e[0];
-          var idx = _.findIndex(ctrl.listFactures, { 'id': e[0] })
-          ctrl.listFactures.splice((idx == -1) ? ctrl.listFactures.length : idx, (idx == -1) ? 0 : 1, theData);
+          var idx = _.findIndex(ctrl.postes, { 'id': e[0] })
+          ctrl.postes.splice((idx == -1) ? ctrl.postes.length : idx, (idx == -1) ? 0 : 1, theData);
           ctrl.editedItem = {};
         });
       });
 
     };
 
-    function addLot()
-    {
-      this.editedItem.lots = angular.isArray(this.editedItem.lots) ? this.editedItem.lots : [];
-      this.editedItem.lots.push({});
-    };
-
     function cancelEdition()
     {
-      this.facturesComponent = 'table';
+      this.postesComponent = 'table';
       this.editedItem = {};
     };
 
@@ -73,8 +70,8 @@ angular.module('myApp')
 
   }],
   bindings: {
-    facturesComponent: '=',
-    listFactures: '=',
+    postesComponent: '=',
+    postes: '=',
     editedItem: '='
   }
 });

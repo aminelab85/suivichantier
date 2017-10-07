@@ -30,6 +30,7 @@ angular.module('myApp')
                 var idx = _.findIndex(ctrl.listFactures, { 'id': ctrl.selected[0].id })
                 ctrl.listFactures.splice(idx, 1);
                 ctrl.selected = [];
+                $rootScope.$broadcast('DBMaj');
               });
             });
           },

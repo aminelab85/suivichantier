@@ -1,0 +1,21 @@
+<div style="background-color: white; height: 100%;">
+  <div ng-hide="$ctrl.parlots.length > 0" style="text-align: center">
+    <h1 class="md-headline" style="color:grey; margin-top: 100px; margin-left:auto;">Aucune facture <md-icon>info_outline</md-icon></h1>
+  </div>
+  <md-table-container style="height: calc(100% - 64px);" ng-show="$ctrl.parlots.length > 0">
+    <table md-table>
+      <thead md-head>
+        <tr md-row>
+          <th md-column><span>Lot</span></th>
+          <th md-column md-numeric><span>Total</span></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row ng-repeat="parlot in $ctrl.parlots | filter:$ctrl.filter.query">
+          <td md-cell>{{parlot.lot}}</td>
+          <td md-cell md-numeric>{{parlot.montant | currency:' € ':2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+</div>

@@ -3,7 +3,7 @@
 angular.module('myApp')
 .component('addFacture', {
   templateUrl: 'components/addFacture/view.html',
-  controller: ['$scope', '$q', '$indexedDB', ($scope, $q, $indexedDB) => {
+  controller: ['$scope', '$rootScope', '$q', '$indexedDB', ($scope, $rootScope, $q, $indexedDB) => {
 
     var ctrl = this;
 
@@ -31,9 +31,10 @@ angular.module('myApp')
       $indexedDB.openStore('factures', (store) => {
         store.upsert(theData).then((e) => {
           theData['id'] = e[0];
-          var idx = _.findIndex(ctrl.listFactures, { 'id': e[0] })
+          var idx = _.findIndex(ctrl.listFactures, { 'id': e[0] });
           ctrl.listFactures.splice((idx == -1) ? ctrl.listFactures.length : idx, (idx == -1) ? 0 : 1, theData);
           ctrl.editedItem = {};
+          $rootScope.$broadcast('DBMaj');
         });
       });
 
