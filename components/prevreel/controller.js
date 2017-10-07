@@ -81,6 +81,32 @@ angular.module('myApp')
      }
     };
 
+    $scope.$on('DBMaj', function(evt, args){
+      $indexedDB.openStore('factures', (store) => {
+        store.getAll().then((facturesItems) => {
+          var sum = _.sumBy(facturesItems, 'montant');
+          var poste = _.find(ctrl.postes, { 'poste': 'Fournitures' });
+          if(!poste)
+          {
+            poste = {
+              'poste': 'Fournitures',
+              'prev' : 0
+            };
+            ctrl.postes.splice(0,0,poste);
+          }
+          poste.reel = sum;
+          if(!poste.id)
+          {
+            $indexedDB.openStore('postes', (store) => {
+              store.upsert(poste).then((e) => {
+                poste['id'] = e[0];
+              });
+            });
+          }
+        });
+      });
+    });
+
     var postesDeffred = $q.defer();
     ctrl.promise = postesDeffred.promise;
 

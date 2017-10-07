@@ -37,7 +37,10 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-table-container style="height: calc(100% - 64px);">
+  <div ng-hide="$ctrl.postes.length > 0" style="text-align: center">
+    <h1  class="md-headline" style="color:grey; margin-top: 100px; margin-left:auto;">Ajouter un poste <md-icon>note_add</md-icon></h1>
+  </div>
+  <md-table-container style="height: calc(100% - 64px);" ng-show="$ctrl.postes.length > 0">
     <table md-table md-row-select ng-model="$ctrl.selected" md-progress="$ctrl.promise">
       <thead md-head md-order="$ctrl.query.order" md-on-reorder="$ctrl.getPostes">
         <tr md-row>
