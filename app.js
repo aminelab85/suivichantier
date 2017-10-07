@@ -1,4 +1,4 @@
-angular.module('myApp', ['ngMaterial','md.data.table','indexedDB'])
+angular.module('myApp', ['ngMaterial','md.data.table','indexedDB','ng-currency'])
 
 .config(($indexedDBProvider) => {
 

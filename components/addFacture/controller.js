@@ -10,12 +10,19 @@ angular.module('myApp')
     var Ctrl = {
       addItem: addItem,
       cancelEdition: cancelEdition,
-      createNew: createNew
+      createNew: createNew,
+      addLot: addLot,
+      deleteLot: deleteLot
     }
 
     $scope.$on('ItemEditedEvent', function(evt, args){
       Ctrl.editedItem = args.data;
     });
+
+    function deleteLot(index)
+    {
+      this.editedItem.lots.splice(index,1);
+    };
 
     function addItem()
     {
@@ -30,6 +37,12 @@ angular.module('myApp')
         });
       });
 
+    };
+
+    function addLot()
+    {
+      this.editedItem.lots = angular.isArray(this.editedItem.lots) ? this.editedItem.lots : [];
+      this.editedItem.lots.push({});
     };
 
     function cancelEdition()

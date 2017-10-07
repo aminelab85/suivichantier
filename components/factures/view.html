@@ -49,7 +49,7 @@
       <tbody md-body>
         <tr md-row md-select="facture" md-select-id="name" md-auto-select ng-repeat="facture in $ctrl.listFactures | filter:$ctrl.filter.query">
           <td md-cell>{{facture.date | date:'dd/MM/yy'}}</td>
-          <td md-cell>{{facture.montant | number:2}}</td>
+          <td md-cell>{{facture.montant | currency :'€':2}}</td>
           <td md-cell>{{facture.description}}</td>
         </tr>
       </tbody>
