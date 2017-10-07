@@ -50,12 +50,15 @@
       <tbody md-body>
         <tr md-row md-select="poste" md-select-id="name" md-auto-select ng-repeat="poste in $ctrl.postes | filter:$ctrl.filter.query">
           <td md-cell>{{poste.poste}}</td>
-          <td md-cell>{{poste.prev | currency :'€':2}}</td>
-          <td md-cell>{{poste.reel | currency :'€':2}}</td>
-          <td md-cell>{{poste.marge | currency :'€':2}}</td>
+          <td md-cell>{{poste.prev | currency :'':2}}</td>
+          <td md-cell>{{poste.reel | currency :'':2}}</td>
+          <td md-cell ng-style="$ctrl.styleMarge(poste)">{{(poste.prev - poste.reel) | currency :'':2}}</td>
         </tr>
       </tbody>
     </table>
   </md-table-container>
 </div>
-<add-poste ng-show="$ctrl.postesComponent == 'form'"></add-poste>
+<add-poste ng-show="$ctrl.postesComponent == 'form'"
+            postes-component="$ctrl.postesComponent"
+            edited-item="$ctrl.editedItem"
+            postes="$ctrl.postes"></add-poste>

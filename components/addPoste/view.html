@@ -1,6 +1,6 @@
 <md-toolbar class="md-table-toolbar md-default">
   <div class="md-toolbar-tools">
-    <h2 class="md-title">Ajouter une facture</h2>
+    <h2 class="md-title">Edition poste</h2>
     <div flex></div>
     <md-button class="md-icon-button" ng-click="$ctrl.addItem()">
       <md-icon style="color: green;">save</md-icon>
@@ -20,21 +20,26 @@
   </p>
   <form name="item.form">
     <div layout="row" class="input-row">
-      <md-input-container>
+      <md-input-container flex>
         <label>Poste</label>
         <input type="text" ng-model="$ctrl.editedItem.poste">
       </md-input-container>
     </div>
     <div layout="row" class="input-row">
-      <md-input-container>
+      <md-input-container flex>
         <label>Prévisionnel</label>
         <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.prev">
       </md-input-container>
     </div>
     <div layout="row" class="input-row">
-      <md-input-container>
+      <md-input-container flex>
         <label>Réel</label>
         <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.reel">
+      </md-input-container>
+    </div>
+    <div layout="row" class="input-row">
+      <md-input-container flex>
+        <h1 md-display-1 ng-style="$ctrl.styleMarge()">{{($ctrl.editedItem.prev - $ctrl.editedItem.reel) | currency :' € ':2}}</h1>
       </md-input-container>
     </div>
   </form>
