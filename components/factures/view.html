@@ -1,0 +1,58 @@
+<div style="background-color: white; height: 100%;" >
+  <md-toolbar class="md-table-toolbar md-primary" ng-hide="$ctrl.selected.length || $ctrl.filter.show">
+    <div class="md-toolbar-tools">
+      <h2 class="md-title">Factures</h2>
+      <div flex></div>
+      <md-button class="md-icon-button" ng-click="$ctrl.filter.show = true">
+        <md-icon>filter_list</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="$ctrl.facturesComponent = 'form'">
+        <md-icon>note_add</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.filter.show && !$ctrl.selected.length">
+    <div class="md-toolbar-tools">
+      <md-icon>search</md-icon>
+      <form flex name="filter.form">
+        <input type="text" style="border: none; outline: none;" ng-model="$ctrl.filter.query" ng-model-options="$ctrl.filter.options" placeholder="search">
+      </form>
+      <md-button class="md-icon-button" ng-click="$ctrl.removeFilter()">
+        <md-icon>highlight_off</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.selected.length">
+    <div class="md-toolbar-tools" >
+      <div>{{$ctrl.selected.length}} {{$ctrl.selected.length > 1 ? 'factures sélectionnées' : 'facture sélectionnée'}}</div>
+      <div flex></div>
+      <md-button class="md-icon-button" ng-click="$ctrl.delete($event)">
+        <md-icon>delete</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="$ctrl.editItem($event)">
+        <md-icon>format_color_text</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="$ctrl.exitSelectionMode($event)">
+        <md-icon><i class="material-icons">highlight_off</i></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-table-container style="height: calc(100% - 64px); overflow-x: hidden;">
+    <table md-table md-row-select ng-model="$ctrl.selected" md-progress="$ctrl.promise">
+      <thead md-head md-order="$ctrl.query.order" md-on-reorder="$ctrl.getFactures">
+        <tr md-row>
+          <th md-column><span>Date</span></th>
+          <th md-column md-numeric><span>Montant</span></th>
+          <th md-column md-numeric>Description</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row md-select="facture" md-select-id="name" md-auto-select ng-repeat="facture in $ctrl.listFactures | filter:$ctrl.filter.query">
+          <td md-cell>{{facture.date | date:'dd/MM/yy'}}</td>
+          <td md-cell>{{facture.montant | number:2}}</td>
+          <td md-cell>{{facture.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+</div>

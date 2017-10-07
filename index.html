@@ -1,0 +1,45 @@
+<!doctype html>
+<html >
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Suivi chantier</title>
+    <link rel="stylesheet" href="vendor/css/angular-material.min.css">
+    <link rel="stylesheet" href="vendor/css/angular-csp.css">
+    <link rel="stylesheet" href="vendor/css/md-data-table.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body ng-app="myApp" ng-cloak>
+    <md-content style="height: 100%;" ng-controller="MainCtrl">
+      <div layout="row" style="height: 100%;">
+        <md-card flex="40" style="height: (100% - 15px);">
+          <add-facture ng-show="facturesComponent == 'form'" flex
+                       factures-component="facturesComponent"
+                       edited-item="editedItem"
+                       list-factures="listFactures"></add-facture>
+          <factures-table ng-show="facturesComponent == 'table'" flex
+                          style="height: 100%;"
+                          factures-component="facturesComponent"
+                          edited-item="editedItem"
+                          list-factures="listFactures"></factures-table>
+        </md-card>
+        <div flex="20">
+        </div>
+        <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
+      </div>
+    </md-content>
+    <script src="vendor/js/lodash.min.js"></script>
+    <script src="vendor/js/angular.min.js"></script>
+    <script src="vendor/js/angular-route.min.js"></script>
+    <script src="vendor/js/angular-aria.min.js"></script>
+    <script src="vendor/js/angular-animate.min.js"></script>
+    <script src="vendor/js/angular-messages.min.js"></script>
+    <script src="vendor/js/angular-material.min.js"></script>
+    <script src="vendor/js/md-data-table.min.js"></script>
+    <script src="vendor/js/angular-indexed-db.min.js"></script>
+    <script src="app.js"></script>
+    <script src="components/factures/controller.js"></script>
+    <script src="components/addFacture/controller.js"></script>
+  </body>
+</html>
