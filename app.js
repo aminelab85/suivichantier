@@ -11,6 +11,11 @@ angular.module('myApp', ['ngMaterial','md.data.table','indexedDB','ng-currency']
          db.createObjectStore('factures', {keyPath: 'id', autoIncrement: true});
       }
 
+      if(!db.objectStoreNames.contains('postes'))
+      {
+         db.createObjectStore('postes', {keyPath: 'id', autoIncrement: true});
+      }
+
     });
 })
 

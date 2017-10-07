@@ -26,11 +26,13 @@
                           list-factures="listFactures"></factures-table>
         </md-card>
         <md-card flex="50" style="background-color: white;" hide show-gt-xs>
+          <tabs-overview list-factures="listFactures"></tabs-overview>
         </md-card>
         <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
       </div>
       <div layout="row" hide-gt-xs style="height: 100%;">
         <md-card flex="grow" style="background-color: white;">
+          <tabs-overview list-factures="listFactures"></tabs-overview>
         </md-card>
         <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
       </div>
@@ -48,5 +50,8 @@
     <script src="app.js"></script>
     <script src="components/factures/controller.js"></script>
     <script src="components/addFacture/controller.js"></script>
+    <script src="components/tabsOverview/controller.js"></script>
+    <script src="components/prevreel/controller.js"></script>
+    <script src="components/addPoste/controller.js"></script>
   </body>
 </html>

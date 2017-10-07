@@ -1,0 +1,61 @@
+<div style="background-color: white; height: 100%;" ng-show="$ctrl.postesComponent == 'table'">
+  <md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length || $ctrl.filter.show">
+    <div class="md-toolbar-tools">
+      <h2 class="md-title"></h2>
+      <div flex></div>
+      <md-button class="md-icon-button" ng-click="$ctrl.filter.show = true">
+        <md-icon>filter_list</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="$ctrl.postesComponent = 'form'">
+        <md-icon>note_add</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.filter.show && !$ctrl.selected.length">
+    <div class="md-toolbar-tools">
+      <md-icon>search</md-icon>
+      <form flex name="filter.form">
+        <input type="text" style="border: none; outline: none;" ng-model="$ctrl.filter.query" ng-model-options="$ctrl.filter.options" placeholder="search">
+      </form>
+      <md-button class="md-icon-button" ng-click="$ctrl.removeFilter()">
+        <md-icon>highlight_off</md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.selected.length">
+    <div class="md-toolbar-tools" >
+      <div>{{$ctrl.selected.length}} {{$ctrl.selected.length > 1 ? 'factures sélectionnées' : 'facture sélectionnée'}}</div>
+      <div flex></div>
+      <md-button class="md-icon-button" ng-click="$ctrl.delete($event)">
+        <md-icon>delete</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="$ctrl.editItem($event)">
+        <md-icon>format_color_text</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" ng-click="$ctrl.exitSelectionMode($event)">
+        <md-icon><i class="material-icons">highlight_off</i></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-table-container style="height: calc(100% - 64px);">
+    <table md-table md-row-select ng-model="$ctrl.selected" md-progress="$ctrl.promise">
+      <thead md-head md-order="$ctrl.query.order" md-on-reorder="$ctrl.getPostes">
+        <tr md-row>
+          <th md-column><span>Poste</span></th>
+          <th md-column md-numeric><span>Prév</span></th>
+          <th md-column md-numeric><span>Réel</span></th>
+          <th md-column md-numeric><span>Marge</span></th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row md-select="poste" md-select-id="name" md-auto-select ng-repeat="poste in $ctrl.postes | filter:$ctrl.filter.query">
+          <td md-cell>{{poste.poste}}</td>
+          <td md-cell>{{poste.prev | currency :'€':2}}</td>
+          <td md-cell>{{poste.reel | currency :'€':2}}</td>
+          <td md-cell>{{poste.marge | currency :'€':2}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+</div>
+<add-poste ng-show="$ctrl.postesComponent == 'form'"></add-poste>
