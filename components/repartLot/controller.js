@@ -9,7 +9,7 @@ angular.module('myApp')
       parlots: []
     };
 
-    function updateDate()
+    function updateData()
     {
       $indexedDB.openStore('factures', (store) => {
 
@@ -26,10 +26,10 @@ angular.module('myApp')
       });
     };
 
-    updateDate();
+    updateData();
 
     $scope.$on('DBMaj', function(evt, args){
-      updateDate();
+      updateData();
     });
 
     return ctrl;
