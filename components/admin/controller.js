@@ -95,20 +95,7 @@ angular.module('myApp')
 
       $mdDialog.show(confirm).then(
         () => {
-          $indexedDB.openStore('general', (store) => {
-            store.clear().then(() => {
-            });
-          });
-
-          $indexedDB.openStore('factures', (store) => {
-            store.clear().then(() => {
-            });
-          });
-
-          $indexedDB.openStore('postes', (store) => {
-            store.clear().then(() => {
-            });
-          });
+          $indexedDB.deleteDatabase('myIndexedDB');
         },
         () => {}
       );
