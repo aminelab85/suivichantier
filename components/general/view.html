@@ -1,0 +1,76 @@
+<!-- <md-toolbar class="md-table-toolbar md-default">
+  <div class="md-toolbar-tools">
+    <h2 class="md-title"></h2>
+    <div flex></div>
+    <md-button class="md-icon-button" ng-click="$ctrl.save()">
+      <md-icon style="color: green;">save</md-icon>
+    </md-button>
+  </div>
+</md-toolbar> -->
+<div layout-padding style="background-color: white; height: calc(100% - 100px);">
+  <md-button class="md-icon-button" ng-click="$ctrl.save()" style="float: right">
+    <md-icon style="color: green;">save</md-icon>
+  </md-button>
+  <p ng-if="item.form.$submitted && item.form.$invalid" class="md-warn" layout="row" layout-align="start center">
+    <i class="material-icons">error_outline</i>
+    <span>&nbsp; All fields are required.</span>
+  </p>
+  <form name="item.form">
+    <div layout-gt-xs="row" layout="column" class="input-row">
+      <md-input-container flex>
+        <label>Client</label>
+        <input type="text" ng-model="$ctrl.editedItem.client">
+      </md-input-container>
+      <md-input-container flex>
+        <label>Marché</label>
+        <input type="text" ng-model="$ctrl.editedItem.marche">
+      </md-input-container>
+    </div>
+    <div layout="row" class="input-row">
+      <md-input-container flex>
+        <label>Adresse</label>
+        <input type="text" ng-model="$ctrl.editedItem.adresse">
+      </md-input-container>
+    </div>
+    <div layout="row" class="input-row">
+
+    </div>
+    <div layout="row" class="input-row">
+      <md-input-container flex>
+        <label>Total HT (10%)</label>
+        <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.htDixTva">
+      </md-input-container>
+      <md-input-container flex>
+        <label>Total HT (20%)</label>
+        <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.htVingtTva">
+      </md-input-container>
+    </div>
+    <div layout="row" class="input-row">
+      <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#B0BEC5;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+        <div>TVA 10%</div>
+        <div style="margin-top:15px; font-weight: bold">{{(($ctrl.editedItem.htDixTva*10)/100) | currency :' € ':2}}</div>
+      </md-whiteframe>
+      <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#B0BEC5;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+        <div>TVA 10%</div>
+        <div style="margin-top:15px; font-weight: bold">{{(($ctrl.editedItem.htVingtTva*20)/100) | currency :' € ':2}}</div>
+      </md-whiteframe>
+      <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#009688;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+        <div>TTC</div>
+        <div style="margin-top:15px; font-weight: bold">{{((($ctrl.editedItem.htVingtTva*20)/100) + (($ctrl.editedItem.htDixTva*10)/100) + $ctrl.editedItem.htDixTva + $ctrl.editedItem.htVingtTva) | currency :' € ':2}}</div>
+      </md-whiteframe>
+    </div>
+    <!--
+    <div layout="row" class="input-row">
+      <md-input-container flex>
+        <label>TVA 10%</label>
+        <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.tvaDix">
+      </md-input-container>
+    </div>
+    <div layout="row" class="input-row">
+      <md-input-container flex>
+        <label>TVA 20%</label>
+        <input ng-currency currency-symbol="€ " type="text" ng-model="$ctrl.editedItem.tvaVingt">
+      </md-input-container> -->
+    </div>
+  </form>
+</div>
