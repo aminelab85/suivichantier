@@ -1,3 +1,10 @@
 <div layout-padding style="background-color: white; height: calc(100% - 100px);">
-  <md-button class="md-raised md-warn" ng-click="$ctrl.dropDb($event)">Supprimer la base</md-button>
+  <div layout="row">
+    <md-button class="md-raised md-warn" ng-click="$ctrl.dropDb($event)">Supprimer la base</md-button>
+    <md-button class="md-raised md-primary" ng-click="$ctrl.exportDb($event)">Export la base</md-button>
+    <md-button class="md-raised md-primary" ng-click="$ctrl.importDb($event)">Import une base</md-button>
+  </div>
+  <div layout="row">
+    <textarea flex style="height: calc(100% - 100px;)">{{$ctrl.json}}</textarea>
+  </div>
 </div>

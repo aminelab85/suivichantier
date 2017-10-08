@@ -22,21 +22,33 @@ angular.module('myApp')
     {
       $indexedDB.openStore('general', (store) => {
         store.getAll().then((generalItems) => {
-          Ctrl.totalTva = ((generalItems[0].htDixTva*10)/100) + ((generalItems[0].htVingtTva*20)/100);
-          Ctrl.tvaApayer = Ctrl.totalTva - Ctrl.tvaRecuperee;
+          if(generalItems.length > 0)
+          {
+            Ctrl.totalTva = ((generalItems[0].htDixTva*10)/100) + ((generalItems[0].htVingtTva*20)/100);
+            Ctrl.tvaApayer = Ctrl.totalTva - Ctrl.tvaRecuperee;
+          }
+
           $indexedDB.openStore('factures', (store) => {
             store.getAll().then((facturesItems) => {
-              var sum = _.sumBy(facturesItems, 'montant');
-              Ctrl.tvaRecuperee = (sum*20)/120;
-              Ctrl.tvaApayer = Ctrl.totalTva - Ctrl.tvaRecuperee;
+              if(facturesItems.length > 0)
+              {
+                var sum = _.sumBy(facturesItems, 'montant');
+                Ctrl.tvaRecuperee = (sum*20)/120;
+                Ctrl.tvaApayer = Ctrl.totalTva - Ctrl.tvaRecuperee;
+              }
+
               $indexedDB.openStore('postes', (store) => {
                 store.getAll().then((postesItems) => {
-                  var sumPrev = _.sumBy(postesItems, 'prev');
-                  var reel = _.sumBy(postesItems, 'reel');
-                  var posteMoi = _.find(postesItems, { 'poste': 'Moi' });
-                  Ctrl.differentiel = sumPrev - reel;
-                  Ctrl.beneficePrev = posteMoi.prev + Ctrl.tvaRecuperee;
-                  Ctrl.beneficeReel = posteMoi.reel + Ctrl.tvaRecuperee;
+                  if(postesItems.length > 0 && !_.find(postesItems,{poste:'Fournitures'}).length == postesItems.length)
+                  {
+                    var sumPrev = _.sumBy(postesItems, 'prev');
+                    var reel = _.sumBy(postesItems, 'reel');
+                    var posteMoi = _.find(postesItems, { 'poste': 'Moi' });
+                    Ctrl.differentiel = sumPrev - reel;
+                    Ctrl.beneficePrev = posteMoi.prev + Ctrl.tvaRecuperee;
+                    Ctrl.beneficeReel = posteMoi.reel + Ctrl.tvaRecuperee;
+                  }
+
                 });
               });
             });
