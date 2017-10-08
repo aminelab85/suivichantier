@@ -1,0 +1,32 @@
+<div layout-padding style="background-color: white; height: calc(100% - 100px);">
+  <div layout="row" class="input-row">
+    <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#B0BEC5;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+      <div>Total TVA</div>
+      <div style="margin-top:15px; font-weight: bold">{{$ctrl.totalTva | currency :' € ':2}}</div>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#B0BEC5;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+      <div>TVA récupérée</div>
+      <div style="margin-top:15px; font-weight: bold">{{$ctrl.tvaRecuperee | currency :' € ':2}}</div>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#F57C00" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+      <div>TVA à payer</div>
+      <div style="margin-top:15px; font-weight: bold">{{$ctrl.tvaApayer | currency :' € ':2}}</div>
+    </md-whiteframe>
+  </div>
+
+  <div layout="row" class="input-row">
+    <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#B0BEC5;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+      <div>Différentiel</div>
+      <div style="margin-top:15px; font-weight: bold">{{$ctrl.differentiel | currency :' € ':2}}</div>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#B0BEC5;" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+      <div>Bénéfice prévisionnel</div>
+      <div style="margin-top:15px; font-weight: bold">{{$ctrl.beneficePrev | currency :' € ':2}}</div>
+    </md-whiteframe>
+    <md-whiteframe class="md-whiteframe-1dp md-padding" style="background-color:#4CAF50" flex-gt-sm="33" flex="50" layout="column" layout-align="center center">
+      <div>Bénéfice réél</div>
+      <div style="margin-top:15px; font-weight: bold">{{$ctrl.beneficeReel | currency :' € ':2}}</div>
+    </md-whiteframe>
+  </div>
+
+</div>
