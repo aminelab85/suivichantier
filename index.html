@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="vendor/css/angular-material.min.css">
     <link rel="stylesheet" href="vendor/css/angular-csp.css">
     <link rel="stylesheet" href="vendor/css/md-data-table.min.css">
+    <link rel="stylesheet" href="vendor/css/jsonViewer.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/main.css">
   </head>
@@ -26,13 +27,13 @@
                           list-factures="listFactures"></factures-table>
         </md-card>
         <md-card flex="50" style="background-color: white;" hide show-gt-xs>
-          <tabs-overview list-factures="listFactures"></tabs-overview>
+          <tabs-overview list-factures="listFactures" style="height: 100%;"></tabs-overview>
         </md-card>
         <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
       </div>
       <div layout="row" hide-gt-xs style="height: 100%;">
         <md-card flex="grow" style="background-color: white;">
-          <tabs-overview list-factures="listFactures"></tabs-overview>
+          <tabs-overview list-factures="listFactures" style="height: 100%;"></tabs-overview>
         </md-card>
         <!-- <md-card ng-include="'components/lots/view.html'" flex="40" style="height: (100% - 15px);"></md-card> -->
       </div>
@@ -47,6 +48,7 @@
     <script src="vendor/js/md-data-table.min.js"></script>
     <script src="vendor/js/angular-indexed-db.min.js"></script>
     <script src="vendor/js/ng-currency.js"></script>
+    <script src="vendor/js/jv.json-viewer.min.js"></script>
     <script src="app.js"></script>
     <script src="components/factures/controller.js"></script>
     <script src="components/addFacture/controller.js"></script>

@@ -3,16 +3,16 @@
 angular.module('myApp')
 .component('admin', {
   templateUrl: 'components/admin/view.html',
-  controller: ['$scope', '$rootScope', '$q', '$indexedDB', '$mdDialog',($scope, $rootScope, $q, $indexedDB, $mdDialog) => {
-
-    var ctrl = this;
+  controller: ['$scope', '$rootScope', '$q', '$indexedDB', '$mdDialog', 'jsonViewerService', ($scope, $rootScope, $q, $indexedDB, $mdDialog, jsonViewerService) => {
 
     var Ctrl = {
       dropDb: dropDb,
       exportDb: exportDb,
       importDb: importDb,
-      json: ''
-    }
+      jsonValue: undefined
+    };
+
+
 
     function importDb(event)
     {
@@ -31,7 +31,7 @@ angular.module('myApp')
                 store.clear().then(() => {
                   $indexedDB.openStore('postes', (store) => {
                     store.clear().then(() => {
-                      var importedData = JSON.parse(ctrl.json);
+                      var importedData = JSON.parse(jsonViewerService.jsonString);
 
                       $indexedDB.openStore('general', (store) => {
                         store.upsert(importedData.general).then((e) => {
@@ -65,16 +65,18 @@ angular.module('myApp')
     function exportDb(event)
     {
       var ObjToExport = {};
-      $indexedDB.openStore('general', (store) => {
-        store.getAll().then((generalItems) => {
+      $indexedDB.openStore('general', (store1) => {
+        store1.getAll().then((generalItems) => {
           ObjToExport.general = generalItems;
-          $indexedDB.openStore('factures', (store) => {
-            store.getAll().then((facturesItems) => {
+          $indexedDB.openStore('factures', (store2) => {
+            store2.getAll().then((facturesItems) => {
               ObjToExport.factures = facturesItems;
-              $indexedDB.openStore('postes', (store) => {
-                store.getAll().then((postesItems) => { // general.client.replace(/ /g, '_')
+              $indexedDB.openStore('postes', (store3) => {
+                store3.getAll().then((postesItems) => { // general.client.replace(/ /g, '_')
                   ObjToExport.postes = postesItems;
-                  Ctrl.json = JSON.stringify(ObjToExport, null, '  ');
+                  document.getElementById('editor').value = JSON.stringify(ObjToExport, null, ' ');
+                  jsonViewerService.jsonString = JSON.stringify(ObjToExport);
+                  jsonViewerService.parseJson();
                 });
               });
             });

@@ -5,6 +5,6 @@
     <md-button class="md-raised md-primary" ng-click="$ctrl.importDb($event)">Import une base</md-button>
   </div>
   <div layout="row">
-    <textarea flex style="height: calc(100% - 100px;)">{{$ctrl.json}}</textarea>
+    <jv-json-viewer style="position: relative; width: 100%; height: 60vh" data="$ctrl.jsonValue" editor="true"></jv-json-viewer>
   </div>
 </div>

@@ -39,7 +39,7 @@ angular.module('myApp')
 
               $indexedDB.openStore('postes', (store) => {
                 store.getAll().then((postesItems) => {
-                  if(postesItems.length > 0 && !_.find(postesItems,{poste:'Fournitures'}).length == postesItems.length)
+                  if(postesItems.length > 0)
                   {
                     var sumPrev = _.sumBy(postesItems, 'prev');
                     var reel = _.sumBy(postesItems, 'reel');
